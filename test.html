@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+    .prodrow {
+      width: 100%;
+      padding: 10px 0;
+      border: 1px solid #ccc;
+    }
+
+    .prodrow:nth-child(2n+1) {
+      background: #f5f5f5
+    }
+
+    /* .addBtn,.removeBtn{ font-size: 18px; } */
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <h1>Info</h1>
+    </div>
+    <form method="post" name="prodForm">
+    <div class="prodlist">
+      <div class="row prodrow">
+        <div class="col-sm-2">
+          <select name="type[]" class="form-control">
+            <optgroup label="GOLD">
+              <option value="1">100g</option>
+              <option value="2">200g</option>
+              <option value="3">300g</option>
+            </optgroup>
+            <optgroup label="SILVER">
+              <option value="1">100g</option>
+              <option value="2">200g</option>
+              <option value="3">300g</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="col-sm-2">
+          <input type="text" name="weight[]" value="" class="form-control" placeholder="Gross/Weight">
+        </div>
+        <div class="col-sm-2">
+          <input type="text" name="qty[]" value="" class="form-control" placeholder="Quantity">
+        </div>
+        <div class="col-sm-2">
+          <input type="text" name="stoneWeight[]" value="" class="form-control" placeholder="Stone Weight">
+        </div>
+        <div class="col-sm-2">
+          <input type="text" name="prodTotal[]" value="" class="form-control" placeholder="Total Price">
+        </div>
+        <div class="col-sm-2">
+          <button type="button" class="btn btn-primary addBtn">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row otherinfo">
+      <button type="submit" class="btn btn-primary" id="save">Save</button>
+    </div>
+
+    </form>
+  </div>
+
+
+  <script>
+    $(document).ready(function () {
+      $(".addBtn").click(function () {
+        $(".prodlist").append('<div class="row prodrow"><div class="col-sm-2"><select name="type[]" class="form-control"><optgroup>GOLD</optgroup><option value="1">100g</option><option value="2">200g</option><option value="3">300g</option></select></div><div class="col-sm-2"><input type="text" name="weight[]" class="form-control" value="" placeholder="Gross/Weight" ></div><div class="col-sm-2"><input type="text" class="form-control" name="qty[]" value="" placeholder="Quantity" ></div><div class="col-sm-2"><input type="text" class="form-control" name="stoneWeight[]" value="" placeholder="Stone Weight" ></div><div class="col-sm-2"><input type="text" class="form-control" name="prodTotal[]" value="" placeholder="Total Price" ></div><div class="col-sm-2"><button type="button" class="btn btn-danger removeBtn">-</button></div></div></div>');
+      });
+
+      $("#save").click(function () {
+        event.preventDefault();
+        var lngtxt = $('input[name="weight[]"]').length;
+        var errCount = 0;
+        if (lngtxt == 0) {
+            errCount++;
+        } else {
+          
+          var eduInput = document.getElementsByName('weight[]');
+          for (let i = 0; i < eduInput.length; i++) {
+            console.log(eduInput[i].value);            
+          }
+         
+          
+          // var values = $("input[name='weight[]']")
+          //     .map(function(){return $(this).val();}).get();
+          // console.log(values,"fdasf");
+
+          
+          // if(prod === '' || prod === undefined || prod === null){
+          //   errCount++;                   
+          // }
+        }
+
+        if(errCount > 0){
+          alert("enter data");
+          return false;
+        }
+      });
+
+    })
+    $(document).on('click', '.removeBtn', function (e) {
+      $(this).parent().parent().remove();
+    });
+
+    //Validate Data
+    // $("#save").click(function () {
+    //   //alert($('input[name="type[0]"]').val());
+    //   console.log($("input[name=weight]").val());
+    //   return false;
+    // })
+
+
+  </script>
+
+</body>
+
+</html>
